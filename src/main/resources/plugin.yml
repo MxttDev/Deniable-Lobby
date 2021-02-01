@@ -1,0 +1,11 @@
+name: Lobby
+main: org.Deniable.Lobby
+version: ${version}
+api-version: 1.13
+author: Asylx
+
+commands:
+  spawn:
+    description: Spawn command
+  admin:
+    description: Admin command

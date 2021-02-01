@@ -1,0 +1,18 @@
+Commands:
+  Spawn:
+    Set: '&bYou have set the spawnpoint to your location!'
+System:
+  Spawn:
+    X: 49
+    Y: 104
+    Z: 70
+  Join:
+    Ranks: '<prefix><player> &bhas arrived!'
+    Default: '&7<player> &bhas arrived!'
+  Chat:
+    Ranks: '<prefix><player>&f: <message>'
+    Default: '&7<player>&f:&7 <message>'
+Bossbar:
+  0: '&b&lJOIN OUR DISCORD USING /DISCORD'
+  1: '&a&lCHECK OUT OUR STORE USING /STORE'
+  2: '&c&lBRAND NEW!'
