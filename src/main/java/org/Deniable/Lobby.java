@@ -8,6 +8,8 @@ import org.Deniable.Commands.Server.Admin;
 import org.Deniable.Commands.Server.Spawn;
 import org.Deniable.Events.Player.*;
 import org.Deniable.Events.Security.BlockBreak;
+import org.Deniable.GUI.AdminGUI.AdminGUIManager;
+import org.Deniable.Utils.PlayerConfig;
 import org.Deniable.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -59,6 +61,9 @@ public class Lobby extends JavaPlugin implements Listener, PluginMessageListener
         getServer().getPluginManager().registerEvents(new Tablist(this,chat),this);
         getServer().getPluginManager().registerEvents(new JoinMessages(this,chat),this);
         getServer().getPluginManager().registerEvents(new onChat(this,chat),this);
+        getServer().getPluginManager().registerEvents(new PlayerConfig(this),this);
+
+        getServer().getPluginManager().registerEvents(new AdminGUIManager(this,chat),this);
 
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);

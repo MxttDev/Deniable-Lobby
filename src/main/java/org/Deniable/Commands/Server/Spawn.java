@@ -39,6 +39,7 @@ public class Spawn implements CommandExecutor {
                     plugin.getConfig().set("System.Spawn.X", X);
                     plugin.getConfig().set("System.Spawn.Y", Y);
                     plugin.getConfig().set("System.Spawn.Z", Z);
+                    plugin.saveConfig();
                     p.sendMessage(Utils.format(plugin.getConfig().getString("Commands.Spawn.Set")));
                 }
             }
