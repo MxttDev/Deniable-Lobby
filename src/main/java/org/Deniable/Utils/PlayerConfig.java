@@ -12,6 +12,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 public class PlayerConfig implements Listener {
@@ -23,23 +25,32 @@ public class PlayerConfig implements Listener {
     }
     static File cfile;
     static FileConfiguration Pconfig;
+    static File MessageFolder;
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         createPlayerConfig(e.getPlayer());
+
+
     }
 
 
 
     public static void createPlayerConfig(Player p) {
-         cfile= new File(plugin.getDataFolder(), p.getUniqueId().toString()+".yml");
+        MessageFolder = new File(plugin.getDataFolder(), "players");
+         cfile= new File(MessageFolder, p.getUniqueId().toString()+".yml");
          if (!plugin.getDataFolder().exists()) {
              plugin.getDataFolder().mkdir();
+         }
+         if (!MessageFolder.exists()) {
+             MessageFolder.mkdirs();
          }
          if (!cfile.exists()) {
              try {
                  cfile.createNewFile();
                  Bukkit.getLogger().info("NEW USER CONFIG CREATED: "+p.getName());
+
+
              } catch (Exception e) {
                  Bukkit.getServer().getConsoleSender().sendMessage("Error creating "+cfile.getName());
              }
@@ -48,11 +59,17 @@ public class PlayerConfig implements Listener {
     }
 
     public static void load(Player p) {
-        cfile = new File(plugin.getDataFolder(), p.getUniqueId().toString() + ".yml");
+        cfile = new File(MessageFolder, p.getUniqueId().toString() + ".yml");
         Pconfig = YamlConfiguration.loadConfiguration(cfile);
     }
 
     public static FileConfiguration get() {
+        return Pconfig;
+    }
+
+    public static FileConfiguration getConfig(Player p) {
+        cfile = new File(MessageFolder, p.getUniqueId().toString() + ".yml");
+        Pconfig = YamlConfiguration.loadConfiguration(cfile);
         return Pconfig;
     }
 

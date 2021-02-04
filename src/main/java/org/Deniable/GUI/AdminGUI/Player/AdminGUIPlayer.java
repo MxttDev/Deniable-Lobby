@@ -2,16 +2,13 @@ package org.Deniable.GUI.AdminGUI.Player;
 
 import net.milkbowl.vault.chat.Chat;
 import org.Deniable.Lobby;
-import org.Deniable.Utils.Head;
+import org.Deniable.Utils.PlayerConfig;
 import org.Deniable.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.SkullType;
-import org.bukkit.block.Skull;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
@@ -26,7 +23,7 @@ public class AdminGUIPlayer {
         this.chat = chat;
     }
 
-    private static int SLOTS = 27; // 9 (1) 18 (2) 27 (3) 36 (4) 45 (5) 54 (6)
+    private static int SLOTS = 54; // 9 (1) 18 (2) 27 (3) 36 (4) 45 (5) 54 (6)
     private static String MenuTitle = "&8Player";
     public static Material BackMat =Material.ARROW;
     private static String Title1 = "&a&lRESET CONFIG";
@@ -42,13 +39,18 @@ public class AdminGUIPlayer {
             SkullMeta itemmeta = (SkullMeta) item.getItemMeta();
             itemmeta.setOwner(a.getName());
             itemmeta.setDisplayName(Utils.format("&e"+a.getName()));
-            item.setItemMeta(itemmeta);
 
             ArrayList Lore1 = new ArrayList<String>();
 
             Lore1.add(Utils.format("&7 "));
-            Lore1.add(Utils.format("&bRank: "+""));
+            Lore1.add(Utils.format("&fRank: &e"+ Utils.format(PlayerConfig.getConfig(a).getString("Player.Rank.Prefix"))));
+            Lore1.add(Utils.format("&fFirst Join: &e"+PlayerConfig.getConfig(a).getString("Stats.FirstJoin.Date")));
+            Lore1.add(Utils.format("&b "));
+            Lore1.add(Utils.format("&fDiscord: &e"+ Utils.getDiscord(a)));
             Lore1.add(Utils.format("&7 "));
+
+            itemmeta.setLore(Lore1);
+            item.setItemMeta(itemmeta);
 
             GUI.setItem(slot, item);
         }

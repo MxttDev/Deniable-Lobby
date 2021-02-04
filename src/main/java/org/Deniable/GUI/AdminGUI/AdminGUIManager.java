@@ -46,6 +46,7 @@ public class AdminGUIManager implements Listener {
             } else if (e.getCurrentItem().getType().equals(AdminGUIServer.BackMat)) {
                 AdminGUI.openAdminGUI(p);
             }
+
         } else {
             e.setCancelled(false);
         }

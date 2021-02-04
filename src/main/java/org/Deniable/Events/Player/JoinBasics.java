@@ -22,5 +22,6 @@ public class JoinBasics implements Listener {
         e.getPlayer().setGameMode(GameMode.ADVENTURE);
 
         e.getPlayer().getInventory().clear();
+        e.getPlayer().setFoodLevel(20);
     }
 }

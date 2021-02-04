@@ -7,8 +7,12 @@ import net.milkbowl.vault.chat.Chat;
 import org.Deniable.Commands.Server.Admin;
 import org.Deniable.Commands.Server.Spawn;
 import org.Deniable.Events.Player.*;
+import org.Deniable.Events.Player.Misc.Anti;
 import org.Deniable.Events.Security.BlockBreak;
 import org.Deniable.GUI.AdminGUI.AdminGUIManager;
+import org.Deniable.GUI.GMSelector.ServerSend;
+import org.Deniable.GUI.GUIManager;
+import org.Deniable.Utils.ChatConfig;
 import org.Deniable.Utils.PlayerConfig;
 import org.Deniable.Utils.Utils;
 import org.bukkit.Bukkit;
@@ -42,6 +46,8 @@ public class Lobby extends JavaPlugin implements Listener, PluginMessageListener
 
         updateScoreboard();
 
+        ChatConfig.createChatConfig();
+
 
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             public void run() {
@@ -62,6 +68,11 @@ public class Lobby extends JavaPlugin implements Listener, PluginMessageListener
         getServer().getPluginManager().registerEvents(new JoinMessages(this,chat),this);
         getServer().getPluginManager().registerEvents(new onChat(this,chat),this);
         getServer().getPluginManager().registerEvents(new PlayerConfig(this),this);
+        getServer().getPluginManager().registerEvents(new JoinConfig(this,chat),this);
+        getServer().getPluginManager().registerEvents(new Inventory(),this);
+        getServer().getPluginManager().registerEvents(new Anti(this,chat),this);
+        getServer().getPluginManager().registerEvents(new ServerSend(),this);
+        getServer().getPluginManager().registerEvents(new GUIManager(),this);
 
         getServer().getPluginManager().registerEvents(new AdminGUIManager(this,chat),this);
 
@@ -115,10 +126,10 @@ public class Lobby extends JavaPlugin implements Listener, PluginMessageListener
             obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 
             Score a1 = obj.getScore(Utils.format("&e &a"));
-            Score a2 = obj.getScore(Utils.format("Rank: &e"+getRank(a)));
+            Score a2 = obj.getScore(Utils.format("Rank: &e"+Utils.getRank(a)));
             Score a3 = obj.getScore(Utils.format("Level: &e0"));
             Score a4 = obj.getScore(Utils.format("&e &b"));
-            Score a5 = obj.getScore(Utils.format("Online: &e"+getServerCount(a, "ALL")));
+            Score a5 = obj.getScore(Utils.format("Online: &e"+Utils.getServerCount(a, "ALL")));
             Score a6 = obj.getScore(Utils.format("&e "));
             Score a7 = obj.getScore(Utils.format("&eplay.deniable.net"));
 
@@ -133,41 +144,5 @@ public class Lobby extends JavaPlugin implements Listener, PluginMessageListener
 
         }
     }
-
-    public String getRank(Player p) {
-        String rank;
-
-        if (chat.getPlayerPrefix(p).equals("")) {
-            rank = "default";
-        } else {
-            rank = chat.getPlayerPrefix(p);
-        }
-
-        return rank;
-    }
-
-
-
-
-
-    public void getCount(Player player, String server) {
-
-        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-        out.writeUTF("PlayerCount");
-        out.writeUTF(server);
-
-        player.sendPluginMessage(this, "BungeeCord", out.toByteArray());
-    }
-
-
-
-    public int getServerCount(Player p, String server) {
-        getCount(p, server);
-        if (Utils.count.get(server) != null) {
-            return Utils.count.get(server);
-        }
-        return 0;
-    }
-
 
 }
