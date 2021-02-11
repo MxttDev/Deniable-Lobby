@@ -26,7 +26,7 @@ public class CosmeticGUI {
     public static Material ItemMat2 =Material.ENCHANTED_BOOK; // Join message
     public static Material ItemMat3 =Material.GLOWSTONE_DUST; // Glow
 
-    private static String MenuTitle = "&8Cosmetics (Lobby)";
+    public static String MenuTitle = "&8Cosmetics (Lobby)";
 
     private static String Title1 = "&aParticles";
     private static String Title2 = "&aJoin Messages";
@@ -74,9 +74,9 @@ public class CosmeticGUI {
         Item2.setItemMeta(ItemMeta2);
         Item3.setItemMeta(ItemMeta3);
 
-        GUI.setItem(0, Item1);
+        GUI.setItem(0, Item3);
         GUI.setItem(4, Item2);
-        GUI.setItem(8, Item3);
+        GUI.setItem(8, Item1);
 
         p.openInventory(GUI);
 

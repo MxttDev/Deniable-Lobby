@@ -19,7 +19,7 @@ public class Tablist implements Listener {
         this.chat = chat;
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPlayerJoin(PlayerJoinEvent e) {
         if (!chat.getPrimaryGroup(e.getPlayer()).equals("default")) {
             e.getPlayer().setPlayerListName(Utils.format(chat.getPlayerPrefix(e.getPlayer())+e.getPlayer().getDisplayName()));

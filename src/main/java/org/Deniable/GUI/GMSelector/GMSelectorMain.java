@@ -22,9 +22,8 @@ public class GMSelectorMain {
         this.chat = chat;
     }
 
+    public static String MenuTitle = "&8Gamemode Menu";
     public static Material ItemMat1 =Material.BLAZE_POWDER; // SMP
-
-    private static String MenuTitle = "&8Gamemode Menu";
 
     private static String Title1 = "&aSMP ";
 

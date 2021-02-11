@@ -16,3 +16,69 @@ Bossbar:
   0: '&b&lJOIN OUR DISCORD USING /DISCORD'
   1: '&a&lCHECK OUT OUR STORE USING /STORE'
   2: '&c&lBRAND NEW!'
+
+
+Cosmetics:
+  Join:
+    Message:
+      MessageUpdate: "&7Your join message has been updated to &b<Message>"
+      Tier1:
+        1: "<Player>&b has arrived!"
+        2: "<Player>&b is now here!"
+        3: "<Player>&b has entered the server!"
+        4: "<Player>&b is upon us!"
+      Tier2:
+        1: "<Player>&b did a backflip into the lobby!"
+        2: "<Player>&b has hopped into the lobby!"
+        3: "<Player>&b decided to join!"
+        4: "<Player>&b is now apparently here..!"
+      Tier3:
+        1: "&bHow did <Player>&b get here?"
+        2: "&bYay.. <Player>&b has joined.."
+        3: "&bWhat is <Player>&b doing here?"
+        4: "&bBig man <Player>&b has arrived!"
+      Tier4:
+        1: "&bWOAH!! <Player>&b is here!!"
+        2: "&bYIPPEEE!! here is <Player>"
+        3: "&bOMGG!! <Player>"
+        4: "&b<Player>&b is here, remember they're bad at Minecraft!"
+    Tier1:
+      Lore:
+        - "&3 "
+        - "&bSelect this item"
+        - "&bto equipped this"
+        - "&bJoin message."
+        - "&7 "
+        - "&7Requires &a[VIP]"
+        - "&8 "
+        - "&eRight-click to preview!"
+    Tier2:
+      Lore:
+        - "&3 "
+        - "&bSelect this item"
+        - "&bto equipped this"
+        - "&bJoin message."
+        - "&7 "
+        - "&7Requires &e[ELITE]"
+        - "&8 "
+        - "&eRight-click to preview!"
+    Tier3:
+      Lore:
+        - "&3 "
+        - "&bSelect this item"
+        - "&bto equipped this"
+        - "&bJoin message."
+        - "&7 "
+        - "&7Requires &b[PRO]"
+        - "&8 "
+        - "&eRight-click to preview!"
+    Tier4:
+      Lore:
+        - "&3 "
+        - "&bSelect this item"
+        - "&bto equipped this"
+        - "&bJoin message."
+        - "&7 "
+        - "&7Requires &d[ULTRA]"
+        - "&8 "
+        - "&eRight-click to preview!"

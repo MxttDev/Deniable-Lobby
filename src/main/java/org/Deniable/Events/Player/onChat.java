@@ -20,10 +20,10 @@ public class onChat implements Listener {
         this.chat = chat;
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onChat(AsyncPlayerChatEvent e) {
 
-        String message = e.getMessage().toLowerCase();
+        String message = e.getMessage();
         String content = ChatConfig.get().getList("Blocked").toString();
 
         for (String s : ChatConfig.get().getStringList("Blocked")) {

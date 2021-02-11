@@ -1,7 +1,6 @@
 package org.Deniable;
 
 import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import net.milkbowl.vault.chat.Chat;
 import org.Deniable.Commands.Server.Admin;
@@ -10,9 +9,11 @@ import org.Deniable.Events.Player.*;
 import org.Deniable.Events.Player.Misc.Anti;
 import org.Deniable.Events.Security.BlockBreak;
 import org.Deniable.GUI.AdminGUI.AdminGUIManager;
-import org.Deniable.GUI.GMSelector.ServerSend;
+import org.Deniable.GUI.CosmeticGUI.Glow.CosmeticGlowSET;
+import org.Deniable.GUI.CosmeticGUI.JoinMessages.CosmeticJoinMInteract;
 import org.Deniable.GUI.GUIManager;
 import org.Deniable.Utils.ChatConfig;
+import org.Deniable.Utils.Glow;
 import org.Deniable.Utils.PlayerConfig;
 import org.Deniable.Utils.Utils;
 import org.bukkit.Bukkit;
@@ -59,6 +60,11 @@ public class Lobby extends JavaPlugin implements Listener, PluginMessageListener
 
     }
 
+    @Override
+    public void onDisable() {
+        getLogger().info("Plugin disabled!");
+    }
+
     private void setupEvents() {
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new JoinBasics(this,chat), this);
@@ -71,8 +77,9 @@ public class Lobby extends JavaPlugin implements Listener, PluginMessageListener
         getServer().getPluginManager().registerEvents(new JoinConfig(this,chat),this);
         getServer().getPluginManager().registerEvents(new Inventory(),this);
         getServer().getPluginManager().registerEvents(new Anti(this,chat),this);
-        getServer().getPluginManager().registerEvents(new ServerSend(),this);
         getServer().getPluginManager().registerEvents(new GUIManager(),this);
+        getServer().getPluginManager().registerEvents(new CosmeticGlowSET(),this);
+        getServer().getPluginManager().registerEvents(new CosmeticJoinMInteract(),this);
 
         getServer().getPluginManager().registerEvents(new AdminGUIManager(this,chat),this);
 
@@ -109,6 +116,10 @@ public class Lobby extends JavaPlugin implements Listener, PluginMessageListener
 
         }
 
+    }
+
+    public void ReloadTheConfig() {
+        reloadConfig();
     }
 
 

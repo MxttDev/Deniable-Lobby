@@ -6,13 +6,18 @@ import net.milkbowl.vault.chat.Chat;
 import org.Deniable.Lobby;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scoreboard.Team;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Utils {
@@ -80,6 +85,34 @@ public class Utils {
             Bukkit.getLogger().info("REPORT TO THE DEVELOPERS.");
         }
         Bukkit.getPlayer(p.getUniqueId()).sendPluginMessage(plugin, "BungeeCord", b.toByteArray());
+    }
+
+    public static ItemStack backArrow() {
+        ItemStack arrow = new ItemStack(Material.ARROW);
+        ItemMeta meta = arrow.getItemMeta();
+        meta.setDisplayName(Utils.format("&aBack"));
+
+        ArrayList arrowlore = new ArrayList<String>();
+        arrowlore.add(Utils.format(""));
+        arrowlore.add(Utils.format("&bReturn to the previous menu!"));
+        arrowlore.add(Utils.format(""));
+
+        meta.setLore(arrowlore);
+        arrow.setItemMeta(meta);
+
+        return arrow;
+
+    }
+
+    public static String getPrefix(Player p) {
+        String prefix;
+        if (chat.getPrimaryGroup(p.getPlayer()).equals("default")) {
+           prefix = "&7";
+        } else {
+            prefix = chat.getPlayerPrefix(p);
+        }
+        
+        return prefix;
     }
 
 
