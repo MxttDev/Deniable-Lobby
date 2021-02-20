@@ -47,7 +47,7 @@ public class AdminGUIManager implements Listener {
             }
 
         } else {
-            e.setCancelled(false);
+            //no
         }
     }
 }

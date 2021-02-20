@@ -48,15 +48,5 @@ public class JoinConfig implements Listener {
             PlayerConfig.get().set("Stats.FirstJoin.Date", formatter.format(date));
             PlayerConfig.save();
         }
-
-        if (PlayerConfig.get().getString("Cosmetics.Join.Message") == null) {
-            PlayerConfig.get().set("Cosmetics.Join.Message", "&b<Player>&b has arrived!");
-            PlayerConfig.save();
-
-        }
-
-
     }
-
-
 }

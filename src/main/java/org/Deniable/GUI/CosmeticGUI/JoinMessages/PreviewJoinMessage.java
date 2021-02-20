@@ -17,7 +17,7 @@ public class PreviewJoinMessage {
         p.sendMessage(Utils.format(format));
         p.sendMessage(Utils.format("&a "));
 
-        Bukkit.getScheduler().runTaskLater(plugin, () -> CosmeticJoinM.openMainGUI(p), 20 * 3); // 3 SECONDS
+        Bukkit.getScheduler().runTaskLater(plugin, () -> CosmeticJoinM.openMainGUI(p), 20 * 2); // 3 SECONDS
 
 
     }

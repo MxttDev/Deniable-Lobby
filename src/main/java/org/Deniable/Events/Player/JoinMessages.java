@@ -29,10 +29,14 @@ public class JoinMessages implements Listener {
         e.getPlayer().getInventory().clear();
         String ranks = Utils.format(Utils.getPrefix(p)+p.getDisplayName());
 
-        if (PlayerConfig.getConfig(p).getString("Cosmetics.Join.Message") == null) {
-            e.setJoinMessage(Utils.format("&7"+Utils.getPrefix(p)+p.getName()+"&b has arrived!"));
+        if (!(chat.getPrimaryGroup(e.getPlayer()).equals("default"))) {
+            if (PlayerConfig.getConfig(p).getString("Cosmetics.Join.Message") == null) {
+                e.setJoinMessage(Utils.format("&7" + Utils.getPrefix(p) + p.getName() + "&b has arrived!"));
+            } else {
+                e.setJoinMessage(Utils.format(PlayerConfig.getConfig(p).getString("Cosmetics.Join.Message").replace("<Player>", ranks)));
+            }
         } else {
-            e.setJoinMessage(Utils.format(PlayerConfig.getConfig(p).getString("Cosmetics.Join.Message").replace("<Player>", ranks)));
+            e.setJoinMessage(Utils.format("&7" + Utils.getPrefix(p) + p.getName() + "&b has arrived!"));
         }
 
 

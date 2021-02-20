@@ -4,6 +4,7 @@ import org.Deniable.GUI.CosmeticGUI.CosmeticGUI;
 import org.Deniable.GUI.CosmeticGUI.Glow.CosmeticGlowGUI;
 import org.Deniable.GUI.CosmeticGUI.JoinMessages.CosmeticJoinM;
 import org.Deniable.GUI.GMSelector.GMSelectorMain;
+import org.Deniable.GUI.ProfileGUI.ProfileGUI;
 import org.Deniable.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -31,6 +32,10 @@ public class GUIManager implements Listener {
                 CosmeticGlowGUI.openMainGUI(p);
             } else if (e.getCurrentItem().getType() == CosmeticGUI.ItemMat2) { // Join Messages Icon
                 CosmeticJoinM.openMainGUI(p);
+                e.setCancelled(true);
+            } else if (e.getCurrentItem().getType() == CosmeticGUI.ItemMat1) { // PARTICLES
+                p.sendMessage(Utils.format("&aWIP"));
+                e.setCancelled(true);
             }
         } else if (e.getView().getTitle().equals(Utils.format(CosmeticGlowGUI.MenuTitle))) { // Cosmetic Glow menu
             if (e.getCurrentItem().getType() == Utils.backArrow().getType()) {
@@ -40,7 +45,11 @@ public class GUIManager implements Listener {
             if (e.getCurrentItem().getType() == Utils.backArrow().getType()) {
                 CosmeticGUI.openMainGUI(p);
             }
+        } else if (e.getView().getTitle().equals(Utils.format(ProfileGUI.MenuTitle))) {
+            if (e.getCurrentItem().getType() == Material.PLAYER_HEAD) {
+                e.setCancelled(true);
 
+            }
         }
     }
 }

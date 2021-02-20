@@ -3,6 +3,8 @@ package org.Deniable;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 import net.milkbowl.vault.chat.Chat;
+import org.Deniable.Commands.Player.gmc;
+import org.Deniable.Commands.Player.gms;
 import org.Deniable.Commands.Server.Admin;
 import org.Deniable.Commands.Server.Spawn;
 import org.Deniable.Events.Player.*;
@@ -90,6 +92,8 @@ public class Lobby extends JavaPlugin implements Listener, PluginMessageListener
     private void setupCommands() {
         this.getCommand("spawn").setExecutor(new Spawn(this, chat));
         this.getCommand("admin").setExecutor(new Admin(this,chat));
+        this.getCommand("gmc").setExecutor(new gmc(this,chat));
+        this.getCommand("gmS").setExecutor(new gms(this,chat));
     }
 
     private boolean setupChat() {

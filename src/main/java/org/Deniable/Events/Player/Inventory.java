@@ -4,13 +4,18 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import org.Deniable.GUI.CosmeticGUI.CosmeticGUI;
 import org.Deniable.GUI.GMSelector.GMSelectorMain;
+import org.Deniable.GUI.ProfileGUI.ProfileGUI;
 import org.Deniable.Utils.Utils;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
@@ -33,11 +38,31 @@ public class Inventory implements Listener {
                 GMSelectorMain.openMainGUI(p);
             } else if (p.getInventory().getItemInMainHand().getType() == Material.CHEST) { // open Cosmetic GUI
                 CosmeticGUI.openMainGUI(p);
-            } else if (p.getInventory().getItemInMainHand().getType() == Material.LEGACY_SKULL_ITEM) { // Open profile GUI
-                p.closeInventory();
+            } else if (p.getInventory().getItemInMainHand().getType() == Material.PLAYER_HEAD) { // Open profile GUI
+                ProfileGUI.openMainGUI(p);
+                Bukkit.getLogger().info("s");
             } else {
                 // DO NOTHING
             }
+        }
+    }
+
+
+    @EventHandler()
+    public void onItemMove(InventoryMoveItemEvent e) {
+        Player p = (Player) e.getSource().getHolder();
+
+        if (!(p.getGameMode() == GameMode.CREATIVE)) {
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void ItemDrop(PlayerDropItemEvent e) {
+        Player p = (Player) e.getPlayer();
+
+        if (!(p.getGameMode() == GameMode.CREATIVE)) {
+            e.setCancelled(true);
         }
     }
 

@@ -9,3 +9,7 @@ commands:
     description: Spawn command
   admin:
     description: Admin command
+  gmc:
+    description: Gamemode creative
+  gms:
+    description: Gamemode survival!
