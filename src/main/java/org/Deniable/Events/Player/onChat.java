@@ -3,6 +3,7 @@ package org.Deniable.Events.Player;
 import net.milkbowl.vault.chat.Chat;
 import org.Deniable.Lobby;
 import org.Deniable.Utils.ChatConfig;
+import org.Deniable.Utils.Discord;
 import org.Deniable.Utils.Utils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,6 +26,9 @@ public class onChat implements Listener {
 
         String message = e.getMessage();
         String content = ChatConfig.get().getList("Blocked").toString();
+        String rank = chat.getPrimaryGroup(e.getPlayer()).toUpperCase();
+
+        Discord.SendMessage("**["+rank+"]** "+e.getPlayer().getName()+": "+e.getMessage(), e.getPlayer());
 
         for (String s : ChatConfig.get().getStringList("Blocked")) {
             if (message.contains(s)) {

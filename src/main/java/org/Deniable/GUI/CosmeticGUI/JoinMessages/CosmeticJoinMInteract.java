@@ -1,23 +1,19 @@
 package org.Deniable.GUI.CosmeticGUI.JoinMessages;
 
-import org.Deniable.GUI.CosmeticGUI.CosmeticGUI;
 import org.Deniable.Lobby;
-import org.Deniable.Utils.PlayerConfig;
+import org.Deniable.Utils.Mongo;
 import org.Deniable.Utils.Utils;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class CosmeticJoinMInteract implements Listener {
 
     public static Lobby plugin = Lobby.getPlugin(Lobby.class);
+
 
     @EventHandler(ignoreCancelled = true)
     public void onInteract(InventoryClickEvent e) {
@@ -35,9 +31,10 @@ public class CosmeticJoinMInteract implements Listener {
                 } else {
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat1) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
+                        p.sendMessage(" ");
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
+                        p.sendMessage(" ");
                     } else {
                         e.setCancelled(true);
                     }
@@ -49,9 +46,10 @@ public class CosmeticJoinMInteract implements Listener {
                 } else {
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat2) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
+                        p.sendMessage(" ");
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
+                        p.sendMessage(" ");
                     } else {
                         e.setCancelled(true);
                     }
@@ -63,9 +61,8 @@ public class CosmeticJoinMInteract implements Listener {
                 } else {
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat3) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
                     } else {
                         e.setCancelled(true);
                     }
@@ -77,9 +74,10 @@ public class CosmeticJoinMInteract implements Listener {
                 } else {
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat4) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
+                        p.sendMessage(" ");
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
+                        p.sendMessage(" ");
                     } else {
                         e.setCancelled(true);
                     }
@@ -91,9 +89,10 @@ public class CosmeticJoinMInteract implements Listener {
                 } else {
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat5) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
+                        p.sendMessage(" ");
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
+                        p.sendMessage(" ");
                     } else {
                         e.setCancelled(true);
                     }
@@ -105,9 +104,10 @@ public class CosmeticJoinMInteract implements Listener {
                 } else {
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat6) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
+                        p.sendMessage(" ");
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
+                        p.sendMessage(" ");
                     } else {
                         e.setCancelled(true);
                     }
@@ -119,9 +119,10 @@ public class CosmeticJoinMInteract implements Listener {
                 } else {
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat7) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
+                        p.sendMessage(" ");
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
+                        p.sendMessage(" ");
                     } else {
                         e.setCancelled(true);
                     }
@@ -133,9 +134,10 @@ public class CosmeticJoinMInteract implements Listener {
                 } else {
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat8) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
+                        p.sendMessage(" ");
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
+                        p.sendMessage(" ");
                     } else {
                         e.setCancelled(true);
                     }
@@ -147,9 +149,10 @@ public class CosmeticJoinMInteract implements Listener {
                 } else {
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat9) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
+                        p.sendMessage(" ");
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
+                        p.sendMessage(" ");
                     } else {
                         e.setCancelled(true);
                     }
@@ -161,9 +164,10 @@ public class CosmeticJoinMInteract implements Listener {
                 } else {
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat10) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
+                        p.sendMessage(" ");
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
+                        p.sendMessage(" ");
                     } else {
                         e.setCancelled(true);
                     }
@@ -175,9 +179,10 @@ public class CosmeticJoinMInteract implements Listener {
                 } else{
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat11) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
+                        p.sendMessage(" ");
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
+                        p.sendMessage(" ");
                     } else {
                         e.setCancelled(true);
                     }
@@ -189,9 +194,10 @@ public class CosmeticJoinMInteract implements Listener {
                 } else{
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat12) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
+                        p.sendMessage(" ");
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
+                        p.sendMessage(" ");
                     } else {
                         e.setCancelled(true);
                     }
@@ -203,9 +209,10 @@ public class CosmeticJoinMInteract implements Listener {
                 } else{
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat13) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
+                        p.sendMessage(" ");
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
+                        p.sendMessage(" ");
                     } else {
                         e.setCancelled(true);
                     }
@@ -217,9 +224,10 @@ public class CosmeticJoinMInteract implements Listener {
                 } else{
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat14) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
+                        p.sendMessage(" ");
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
+                        p.sendMessage(" ");
                     } else {
                         e.setCancelled(true);
                     }
@@ -231,9 +239,10 @@ public class CosmeticJoinMInteract implements Listener {
                 } else{
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat15) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
+                        p.sendMessage(" ");
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
+                        p.sendMessage(" ");
                     } else {
                         e.setCancelled(true);
                     }
@@ -245,9 +254,10 @@ public class CosmeticJoinMInteract implements Listener {
                 } else{
                     if (e.getCurrentItem().getType() == CosmeticJoinM.ItemMat16) {
                         p.closeInventory();
-                        PlayerConfig.getConfig(p).set("Cosmetics.Join.Message", message);
+                        Mongo.InsertPlayerData(p, "Join Message", message);
+                        p.sendMessage(" ");
                         p.sendMessage(Utils.format(plugin.getConfig().getString("Cosmetics.Join.Message.MessageUpdate").replace("<Message>", message)));
-                        PlayerConfig.save();
+                        p.sendMessage(" ");
                     } else {
                         e.setCancelled(true);
                     }

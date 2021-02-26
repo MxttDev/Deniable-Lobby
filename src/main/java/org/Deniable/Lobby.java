@@ -9,14 +9,13 @@ import org.Deniable.Commands.Server.Admin;
 import org.Deniable.Commands.Server.Spawn;
 import org.Deniable.Events.Player.*;
 import org.Deniable.Events.Player.Misc.Anti;
-import org.Deniable.Events.Security.BlockBreak;
 import org.Deniable.GUI.AdminGUI.AdminGUIManager;
 import org.Deniable.GUI.CosmeticGUI.Glow.CosmeticGlowSET;
 import org.Deniable.GUI.CosmeticGUI.JoinMessages.CosmeticJoinMInteract;
 import org.Deniable.GUI.GUIManager;
 import org.Deniable.Utils.ChatConfig;
-import org.Deniable.Utils.Glow;
-import org.Deniable.Utils.PlayerConfig;
+import org.Deniable.Utils.Discord;
+import org.Deniable.Utils.Mongo;
 import org.Deniable.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -24,12 +23,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
+
+import java.net.UnknownHostException;
 
 public class Lobby extends JavaPlugin implements Listener, PluginMessageListener {
 
@@ -50,7 +52,13 @@ public class Lobby extends JavaPlugin implements Listener, PluginMessageListener
         updateScoreboard();
 
         ChatConfig.createChatConfig();
+        Discord.InitDiscordBot();
 
+        try {
+            Mongo.SetupMongoDB();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
 
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             public void run() {
@@ -65,23 +73,24 @@ public class Lobby extends JavaPlugin implements Listener, PluginMessageListener
     @Override
     public void onDisable() {
         getLogger().info("Plugin disabled!");
+        Discord.Shutdown();
     }
 
     private void setupEvents() {
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new JoinBasics(this,chat), this);
-        getServer().getPluginManager().registerEvents(new BlockBreak(), this);
         getServer().getPluginManager().registerEvents(new bossBar(this,chat),this);
         getServer().getPluginManager().registerEvents(new Tablist(this,chat),this);
-        getServer().getPluginManager().registerEvents(new JoinMessages(this,chat),this);
+
         getServer().getPluginManager().registerEvents(new onChat(this,chat),this);
-        getServer().getPluginManager().registerEvents(new PlayerConfig(this),this);
-        getServer().getPluginManager().registerEvents(new JoinConfig(this,chat),this);
+        getServer().getPluginManager().registerEvents(new Mongo(this),this);
+
         getServer().getPluginManager().registerEvents(new Inventory(),this);
         getServer().getPluginManager().registerEvents(new Anti(this,chat),this);
         getServer().getPluginManager().registerEvents(new GUIManager(),this);
         getServer().getPluginManager().registerEvents(new CosmeticGlowSET(),this);
         getServer().getPluginManager().registerEvents(new CosmeticJoinMInteract(),this);
+        getServer().getPluginManager().registerEvents(new Blocks(), this);
 
         getServer().getPluginManager().registerEvents(new AdminGUIManager(this,chat),this);
 
@@ -122,6 +131,7 @@ public class Lobby extends JavaPlugin implements Listener, PluginMessageListener
 
     }
 
+
     public void ReloadTheConfig() {
         reloadConfig();
     }
@@ -131,6 +141,11 @@ public class Lobby extends JavaPlugin implements Listener, PluginMessageListener
 
     @EventHandler
     public void OnJoin(PlayerJoinEvent e) {
+        updateScoreboard();
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e) {
         updateScoreboard();
     }
 

@@ -2,6 +2,8 @@ package org.Deniable.Events.Player;
 
 import net.milkbowl.vault.chat.Chat;
 import org.Deniable.Lobby;
+import org.Deniable.Utils.Discord;
+import org.Deniable.Utils.Mongo;
 import org.Deniable.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -22,6 +24,8 @@ public class JoinBasics implements Listener {
     Lobby plugin;
     private Chat chat = null;
 
+
+
     public JoinBasics(Lobby main, Chat chat) {
         this.plugin = main;
         this.chat = chat;
@@ -29,9 +33,12 @@ public class JoinBasics implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerJoin(PlayerJoinEvent e) {
+        Player p = e.getPlayer();
         e.getPlayer().setGameMode(GameMode.ADVENTURE);
+        String PrefixPlayer = Utils.getPrefix(p)+p.getName();
 
         e.getPlayer().getInventory().clear();
+
         e.getPlayer().setFoodLevel(20);
 
         Double X = plugin.getConfig().getDouble("System.Spawn.X");
@@ -39,37 +46,26 @@ public class JoinBasics implements Listener {
         Double Z = plugin.getConfig().getDouble("System.Spawn.Z");
 
         e.getPlayer().teleport(new Location(e.getPlayer().getWorld(), X, Y, Z, 180, 0));
-        setPlayerPerms(e.getPlayer());
-    }
 
-    @EventHandler(ignoreCancelled = true)
-    public void onquit(PlayerQuitEvent e) {
-        Permission.put(e.getPlayer().getUniqueId(), 0);
-        e.setQuitMessage(Utils.format("&7"+Utils.getPrefix(e.getPlayer())+e.getPlayer().getName()+"&b has quit!"));
-    }
+        Discord.SendMessage("**JOIN** "+e.getPlayer().getName(),e.getPlayer());
 
-    public static HashMap<UUID, Integer> Permission = new HashMap<UUID, Integer>();
-
-    public void setPlayerPerms(Player p) {
-
-        Bukkit.getLogger().info(chat.getPrimaryGroup(p));
-
-        if (chat.getPrimaryGroup(p).equals("default")) {
-            Permission.put(p.getUniqueId(), 0);
-        }else if (chat.getPrimaryGroup(p).equals("vip")) {
-            Permission.put(p.getUniqueId(), 1);
-        } else if (chat.getPrimaryGroup(p).equals("elite")) {
-            Permission.put(p.getUniqueId(), 2);
-        } else if (chat.getPrimaryGroup(p).equals("pro")) {
-            Permission.put(p.getUniqueId(), 3);
-        } else if (chat.getPrimaryGroup(p).equals("ultra")) {
-            Permission.put(p.getUniqueId(), 4);
+        if (!p.hasPlayedBefore()) {
+            int num = plugin.getConfig().getInt("System.Joins");
+            num++;
+            plugin.getConfig().set("Joins", num);
+            e.setJoinMessage(Utils.format("&e"+p.getName()+"&7 has joined Deniable for the first time! &e[#"+num+"]"));
         } else {
-            Permission.put(p.getUniqueId(), 4);
+            String msg = Mongo.getData(p).getString("Join Message").replace("<Player>", PrefixPlayer);
+            e.setJoinMessage(Utils.format(msg));
         }
 
     }
 
+    @EventHandler(ignoreCancelled = true)
+    public void onquit(PlayerQuitEvent e) {
+        e.setQuitMessage(Utils.format("&7"+Utils.getPrefix(e.getPlayer())+e.getPlayer().getName()+"&b has quit!"));
+        Discord.SendMessage("**LEAVE** "+e.getPlayer().getName(),e.getPlayer());
+    }
 
 
 }

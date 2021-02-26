@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -28,32 +29,27 @@ public class Inventory implements Listener {
     ItemStack item3 = new ItemStack(Material.LEGACY_SKULL_ITEM, 1, (short) 3);
 
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    @EventHandler
     public void onInventory(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if ((e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) || (e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK)) {
-
-            if (p.getInventory().getItemInMainHand().getType() == Material.COMPASS) { // Open Server GUI
-                GMSelectorMain.openMainGUI(p);
-            } else if (p.getInventory().getItemInMainHand().getType() == Material.CHEST) { // open Cosmetic GUI
-                CosmeticGUI.openMainGUI(p);
-            } else if (p.getInventory().getItemInMainHand().getType() == Material.PLAYER_HEAD) { // Open profile GUI
-                ProfileGUI.openMainGUI(p);
-                Bukkit.getLogger().info("s");
-            } else {
-                // DO NOTHING
-            }
+        if (p.getInventory().getItemInMainHand().getType() == Material.COMPASS) { // Open Server GUI
+            GMSelectorMain.openMainGUI(p);
+        } else if (p.getInventory().getItemInMainHand().getType() == Material.CHEST) { // open Cosmetic GUI
+            CosmeticGUI.openMainGUI(p);
+        } else if (p.getInventory().getItemInMainHand().getType() == Material.PLAYER_HEAD) { // Open profile GUI
+            ProfileGUI.openMainGUI(p);
         }
     }
 
 
-    @EventHandler()
-    public void onItemMove(InventoryMoveItemEvent e) {
-        Player p = (Player) e.getSource().getHolder();
-
-        if (!(p.getGameMode() == GameMode.CREATIVE)) {
-            e.setCancelled(true);
+    @EventHandler
+    public void onItemClick(InventoryClickEvent e) {
+        if (e.getView().getTitle().equals(Utils.format("Crafting"))) {
+            Player p = (Player) e.getWhoClicked();
+            if (p.getGameMode() != GameMode.CREATIVE) {
+                e.setCancelled(true);
+            }
         }
     }
 
@@ -61,7 +57,7 @@ public class Inventory implements Listener {
     public void ItemDrop(PlayerDropItemEvent e) {
         Player p = (Player) e.getPlayer();
 
-        if (!(p.getGameMode() == GameMode.CREATIVE)) {
+        if (p.getGameMode() != GameMode.CREATIVE) {
             e.setCancelled(true);
         }
     }

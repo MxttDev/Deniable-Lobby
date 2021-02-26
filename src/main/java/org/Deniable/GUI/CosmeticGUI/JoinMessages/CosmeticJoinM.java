@@ -3,6 +3,7 @@ package org.Deniable.GUI.CosmeticGUI.JoinMessages;
 import net.milkbowl.vault.chat.Chat;
 import org.Deniable.Events.Player.JoinBasics;
 import org.Deniable.Lobby;
+import org.Deniable.Utils.Mongo;
 import org.Deniable.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -250,13 +251,13 @@ public class CosmeticJoinM {
         GUI.setItem(42,none4);
         GUI.setItem(43,none4);
 
-        if (JoinBasics.Permission.get(p.getUniqueId()) == 1) {
+        if (Mongo.permissionLvl.get(p.getUniqueId()) == 1) {
             GUI.setItem(12, Item1); // SNOWBALL
             GUI.setItem(13, Item2); // REDSTONE
             GUI.setItem(15, Item3); // STICK
             GUI.setItem(16, Item4); // FEATHER
 
-        } else if (JoinBasics.Permission.get(p.getUniqueId()) == 2) {
+        } else if (Mongo.permissionLvl.get(p.getUniqueId()) == 2) {
             GUI.setItem(12, Item1); // SNOWBALL
             GUI.setItem(13, Item2); // REDSTONE
             GUI.setItem(15, Item3); // STICK
@@ -265,7 +266,7 @@ public class CosmeticJoinM {
             GUI.setItem(22, Item6); // BONE
             GUI.setItem(24, Item7); // gray g
             GUI.setItem(25, Item8); // gray g
-        } else if (JoinBasics.Permission.get(p.getUniqueId()) == 3) {
+        } else if (Mongo.permissionLvl.get(p.getUniqueId()) == 3) {
             GUI.setItem(12, Item1); // SNOWBALL
             GUI.setItem(13, Item2); // REDSTONE
             GUI.setItem(15, Item3); // STICK
@@ -278,7 +279,7 @@ public class CosmeticJoinM {
             GUI.setItem(31, Item10); // BONE
             GUI.setItem(33, Item11); // gray g
             GUI.setItem(34, Item12); // gray g
-        } else if (JoinBasics.Permission.get(p.getUniqueId()) == 4) {
+        } else if (Mongo.permissionLvl.get(p.getUniqueId()) == 4) {
             GUI.setItem(12, Item1); // SNOWBALL
             GUI.setItem(13, Item2); // REDSTONE
             GUI.setItem(15, Item3); // STICK

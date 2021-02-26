@@ -12,6 +12,7 @@ System:
   Chat:
     Ranks: '<prefix><player>&f: <message>'
     Default: '&7<player>&f:&7 <message>'
+  Joins: 0007
 Bossbar:
   0: '&b&lJOIN OUR DISCORD USING /DISCORD'
   1: '&a&lCHECK OUT OUR STORE USING /STORE'

@@ -2,7 +2,6 @@ package org.Deniable.GUI.AdminGUI.Player;
 
 import net.milkbowl.vault.chat.Chat;
 import org.Deniable.Lobby;
-import org.Deniable.Utils.PlayerConfig;
 import org.Deniable.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -43,8 +42,7 @@ public class AdminGUIPlayer {
             ArrayList Lore1 = new ArrayList<String>();
 
             Lore1.add(Utils.format("&7 "));
-            Lore1.add(Utils.format("&fRank: &e"+ Utils.format(PlayerConfig.getConfig(a).getString("Player.Rank.Prefix"))));
-            Lore1.add(Utils.format("&fFirst Join: &e"+PlayerConfig.getConfig(a).getString("Stats.FirstJoin.Date")));
+
             Lore1.add(Utils.format("&b "));
             Lore1.add(Utils.format("&fDiscord: &e"+ Utils.getDiscord(a)));
             Lore1.add(Utils.format("&7 "));

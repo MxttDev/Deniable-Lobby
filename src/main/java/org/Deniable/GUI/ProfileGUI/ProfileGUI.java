@@ -2,14 +2,13 @@ package org.Deniable.GUI.ProfileGUI;
 
 import net.milkbowl.vault.chat.Chat;
 import org.Deniable.Lobby;
-import org.Deniable.Utils.PlayerConfig;
+import org.Deniable.Utils.Mongo;
 import org.Deniable.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
@@ -40,10 +39,10 @@ public class ProfileGUI {
 
         Lore1.add(Utils.format("&7 "));
         Lore1.add(Utils.format("&fRank: "+Utils.getRank(p)));
-        Lore1.add(Utils.format("&fFirst Join:&e "+PlayerConfig.getConfig(p).getString("Stats.FirstJoin.Date")));
+
         Lore1.add(Utils.format("&a "));
         Lore1.add(Utils.format("&fDiscord:&e "+Utils.getDiscord(p)));
-        Lore1.add(Utils.format("&b "));
+        Lore1.add(Utils.format("&fFirst Join: &e"+ Mongo.getData(p).get("First Join")));
         Lore1.add(Utils.format("&fLevel: &e0"));
         Lore1.add(Utils.format("&3 "));
 
