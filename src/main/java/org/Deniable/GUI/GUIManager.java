@@ -26,6 +26,7 @@ public class GUIManager implements Listener {
         } else if (e.getView().getTitle().equals(Utils.format(GMSelectorMain.MenuTitle))) { //Gamemode Selector
             if (e.getCurrentItem().getType() == GMSelectorMain.ItemMat1) { // SMP ICON
                 Utils.serverSend("SMP", p); // connect player to smp server
+                e.setCancelled(true);
             }
         } else if (e.getView().getTitle().equals(Utils.format(CosmeticGUI.MenuTitle))) { // Cosmetic Menu
             if (e.getCurrentItem().getType() == CosmeticGUI.ItemMat3) {// GLOW ICON

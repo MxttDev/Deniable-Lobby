@@ -1,6 +1,7 @@
 package org.Deniable.GUI.CosmeticGUI.Glow;
 
 import org.Deniable.Utils.Glow;
+import org.Deniable.Utils.Mongo;
 import org.Deniable.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -22,28 +23,48 @@ public class CosmeticGlowSET implements Listener {
 
         if (e.getView().getTitle().equals(Utils.format(CosmeticGlowGUI.MenuTitle))) {
             if (e.getCurrentItem().getType() == CosmeticGlowGUI.ItemMat1) { // SUNFLOWER (GRAY GLOW)
-                p.closeInventory();
+                if (Mongo.getData(p).get("Permission Level").equals(1) || (Mongo.getData(p).get("Permission Level").equals(2)) || Mongo.getData(p).get("Permission Level").equals(3) || Mongo.getData(p).get("Permission Level").equals(4)) {
+                    p.closeInventory();
 
-                Glow.setGlow(p, ChatColor.GRAY);
-                p.sendMessage(Utils.format("&bYou have set your glow to Gray!"));
+                    Glow.setGlow(p, ChatColor.GRAY);
+                    p.sendMessage(Utils.format("&bYou have set your glow to Gray!"));
+                } else {
+                    p.closeInventory();
+                    p.sendMessage(Utils.format("&cYou do not have the required rank for that!"));
+                }
 
             } else if (e.getCurrentItem().getType() == CosmeticGlowGUI.ItemMat2) { // SLIME BALL (AQUA)
-                p.closeInventory();
+                if (Mongo.getData(p).get("Permission Level").equals(2) || Mongo.getData(p).get("Permission Level").equals(3) || Mongo.getData(p).get("Permission Level").equals(4)) {
+                    p.closeInventory();
 
-                Glow.setGlow(p, ChatColor.AQUA);
-                p.sendMessage(Utils.format("&bYou have set your glow to Aqua!"));
+                    Glow.setGlow(p, ChatColor.AQUA);
+                    p.sendMessage(Utils.format("&bYou have set your glow to Aqua!"));
+                } else {
+                    p.closeInventory();
+                    p.sendMessage(Utils.format("&cYou do not have the required rank for that!"));
+                }
 
             } else if (e.getCurrentItem().getType() == CosmeticGlowGUI.ItemMat3) { // APPLE (PINK)
-                p.closeInventory();
+                if (Mongo.getData(p).get("Permission Level").equals(3) || Mongo.getData(p).get("Permission Level").equals(4)) {
+                    p.closeInventory();
 
-                Glow.setGlow(p, ChatColor.LIGHT_PURPLE);
-                p.sendMessage(Utils.format("&bYou have set your glow to Pink!"));
+                    Glow.setGlow(p, ChatColor.LIGHT_PURPLE);
+                    p.sendMessage(Utils.format("&bYou have set your glow to Pink!"));
+                } else {
+                    p.closeInventory();
+                    p.sendMessage(Utils.format("&cYou do not have the required rank for that!"));
+                }
 
             } else if (e.getCurrentItem().getType() == CosmeticGlowGUI.ItemMat4) { // GOLDEN APPLE (RED)
-                p.closeInventory();
+                if (Mongo.getData(p).get("Permission Level").equals(4)) {
+                    p.closeInventory();
 
-                Glow.setGlow(p, ChatColor.RED);
-                p.sendMessage(Utils.format("&bYou have set your glow to Red!"));
+                    Glow.setGlow(p, ChatColor.RED);
+                    p.sendMessage(Utils.format("&bYou have set your glow to Red!"));
+                } else {
+                    p.closeInventory();
+                    p.sendMessage(Utils.format("&cYou do not have the required rank for that!"));
+                }
 
             } else if (e.getCurrentItem().getType() == CosmeticGlowGUI.ItemMat0) { // Barrier
                 p.closeInventory();

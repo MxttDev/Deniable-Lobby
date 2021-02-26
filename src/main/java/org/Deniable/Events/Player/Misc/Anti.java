@@ -2,16 +2,21 @@ package org.Deniable.Events.Player.Misc;
 
 import net.milkbowl.vault.chat.Chat;
 import org.Deniable.Lobby;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerEditBookEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 
 public class Anti implements Listener {
     Lobby plugin;
@@ -25,22 +30,23 @@ public class Anti implements Listener {
     @EventHandler
     public void onDamage(EntityDamageEvent e) {
         Player p = (Player) e.getEntity();
-         if (e.getEntityType() == EntityType.PLAYER) {
-            if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
-                e.setCancelled(true);
-                Double X = plugin.getConfig().getDouble("System.Spawn.X");
-                Double Y = plugin.getConfig().getDouble("System.Spawn.Y");
-                Double Z = plugin.getConfig().getDouble("System.Spawn.Z");
+        e.setCancelled(true);
+    }
 
-                p.teleport(new Location(p.getWorld(), X, Y, Z, 180, 0));
-                p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 3.0F, 0.5F);
-                p.setHealth(20);
-            } else {
-                e.setCancelled(true);
-            }
-        } else {
-             e.setCancelled(true);
-         }
+    @EventHandler
+    public void OnVoiDamage(PlayerMoveEvent e) {
+        Player p = e.getPlayer();
+
+        if (p.getLocation().getBlockY() <= 90) {
+            Double X = plugin.getConfig().getDouble("System.Spawn.X");
+            Double Y = plugin.getConfig().getDouble("System.Spawn.Y");
+            Double Z = plugin.getConfig().getDouble("System.Spawn.Z");
+
+            p.teleport(new Location(p.getWorld(), X, Y, Z, 180, 0));
+            p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 3.0F, 0.5F);
+            p.setHealth(20);
+        }
+
     }
 
     @EventHandler
@@ -52,6 +58,22 @@ public class Anti implements Listener {
     @EventHandler
     public void onLeaveDecay(LeavesDecayEvent e) {
         e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onAnvilUse(PlayerInteractEvent e) {
+        Player p = e.getPlayer();
+
+        if (p.getGameMode() != GameMode.CREATIVE) {
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.ANVIL)) {
+                e.setCancelled(true);
+            }
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.HOPPER)) {e.setCancelled(true);}
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.CRAFTING_TABLE)) {e.setCancelled(true);}
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.OAK_TRAPDOOR)) {e.setCancelled(true);}
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.CHEST)) {e.setCancelled(true);}
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.ENDER_CHEST)) {e.setCancelled(true);}
+        }
     }
 
 }
