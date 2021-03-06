@@ -15,6 +15,7 @@ import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerEditBookEvent;
+import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
@@ -65,15 +66,38 @@ public class Anti implements Listener {
         Player p = e.getPlayer();
 
         if (p.getGameMode() != GameMode.CREATIVE) {
-            if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.ANVIL)) {
-                e.setCancelled(true);
-            }
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.ANVIL)) { e.setCancelled(true); }
             if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.HOPPER)) {e.setCancelled(true);}
             if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.CRAFTING_TABLE)) {e.setCancelled(true);}
             if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.OAK_TRAPDOOR)) {e.setCancelled(true);}
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.SPRUCE_TRAPDOOR)) {e.setCancelled(true);}
             if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.CHEST)) {e.setCancelled(true);}
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.TRAPPED_CHEST)) {e.setCancelled(true);}
             if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.ENDER_CHEST)) {e.setCancelled(true);}
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.ACACIA_FENCE_GATE)) {e.setCancelled(true);}
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.LOOM)) {e.setCancelled(true);}
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.ENCHANTING_TABLE)) {e.setCancelled(true);}
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.PAINTING)) {e.setCancelled(true);}
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK && (e.getClickedBlock().getType() == Material.ARMOR_STAND)) {e.setCancelled(true);}
         }
+    }
+
+    @EventHandler
+    public void Armorstand(PlayerInteractAtEntityEvent e) {
+        Player p = e.getPlayer();
+        if (p.getGameMode() != GameMode.CREATIVE) {
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void CropAbuse(PlayerInteractEvent e) {
+        Player p =e.getPlayer();
+
+        if (e.getAction() == Action.PHYSICAL && e.getClickedBlock().getType() == Material.FARMLAND) {
+            e.setCancelled(true);
+        }
+
     }
 
 }

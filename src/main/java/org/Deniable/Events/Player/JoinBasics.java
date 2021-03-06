@@ -45,7 +45,7 @@ public class JoinBasics implements Listener {
         Double Y = plugin.getConfig().getDouble("System.Spawn.Y");
         Double Z = plugin.getConfig().getDouble("System.Spawn.Z");
 
-        e.getPlayer().teleport(new Location(e.getPlayer().getWorld(), X, Y, Z, 180, 0));
+        e.getPlayer().teleport(new Location(e.getPlayer().getWorld(), X, Y, Z, 90, 0));
 
         Discord.SendMessage("**JOIN** "+e.getPlayer().getName(),e.getPlayer());
 
@@ -54,10 +54,22 @@ public class JoinBasics implements Listener {
             num++;
             plugin.getConfig().set("Joins", num);
             e.setJoinMessage(Utils.format("&e"+p.getName()+"&7 has joined Deniable for the first time! &e[#"+num+"]"));
+            plugin.saveConfig();
         } else {
             String msg = Mongo.getData(p).getString("Join Message").replace("<Player>", PrefixPlayer);
-            e.setJoinMessage(Utils.format(msg));
+
+            if (msg != null) {
+                e.setJoinMessage(Utils.format(msg));
+            } else {
+                e.setJoinMessage(Utils.format("&b<Player> has arrived!").replace("<Player>", PrefixPlayer));
+            }
+
         }
+
+        if (!chat.getPrimaryGroup(p).equals("default")) {
+            p.setAllowFlight(true);
+        }
+
 
     }
 

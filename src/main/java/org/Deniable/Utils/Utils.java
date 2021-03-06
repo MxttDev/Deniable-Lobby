@@ -59,7 +59,7 @@ public class Utils {
         String rank;
 
         if (chat.getPlayerPrefix(p).equals("")) {
-            rank = "default";
+            rank = "Default";
         } else {
             rank = chat.getPlayerPrefix(p);
         }

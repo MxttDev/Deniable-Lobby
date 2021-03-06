@@ -4,8 +4,10 @@ import net.milkbowl.vault.chat.Chat;
 import org.Deniable.Lobby;
 import org.Deniable.Utils.ChatConfig;
 import org.Deniable.Utils.Discord;
+import org.Deniable.Utils.Mongo;
 import org.Deniable.Utils.Utils;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
@@ -21,12 +23,14 @@ public class onChat implements Listener {
         this.chat = chat;
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOW)
     public void onChat(AsyncPlayerChatEvent e) {
-
         String message = e.getMessage();
-        String content = ChatConfig.get().getList("Blocked").toString();
         String rank = chat.getPrimaryGroup(e.getPlayer()).toUpperCase();
+
+        String DefaultFormat = plugin.getConfig().getString("System.Chat.Default").replace("<player>", "%1$s");
+
+        String DonorFormat = plugin.getConfig().getString("System.Chat.Ranks").replace("<player>", "%1$s").replace("<prefix>", chat.getPlayerPrefix(e.getPlayer()));
 
         Discord.SendMessage("**["+rank+"]** "+e.getPlayer().getName()+": "+e.getMessage(), e.getPlayer());
 
@@ -38,9 +42,16 @@ public class onChat implements Listener {
 
 
         if (chat.getPrimaryGroup(e.getPlayer()).equals("default")) {
-            e.setFormat(Utils.format(plugin.getConfig().getString("System.Chat.Default").replace("<player>", e.getPlayer().getName()).replace("<message>", message)));
+            e.setFormat(Utils.format(DefaultFormat).replace("<message>", "%2$s"));
+            e.setMessage(message);
         } else {
-            e.setFormat(Utils.format(plugin.getConfig().getString("System.Chat.Ranks").replace("<player>", e.getPlayer().getName()).replace("<prefix>", chat.getPlayerPrefix(e.getPlayer())).replace("<message>", message)));
+            e.setFormat(Utils.format(DonorFormat).replace("<message>", "%2$s"));
+
+            if (Mongo.permissionLvl.get(e.getPlayer().getUniqueId()) == 4) {
+                e.setMessage(Utils.format(message));
+            } else {
+                e.setMessage(message);
+            }
         }
     }
 }

@@ -48,7 +48,7 @@ public class Spawn implements CommandExecutor {
             Y = plugin.getConfig().getDouble("System.Spawn.Y");
             Z = plugin.getConfig().getDouble("System.Spawn.Z");
 
-            p.teleport(new Location(p.getWorld(), X, Y, Z, 180, 0));
+            p.teleport(new Location(p.getWorld(), X, Y, Z, 90, 0));
             p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 3.0F, 0.5F);
 
 

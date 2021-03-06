@@ -93,6 +93,7 @@ public class Mongo implements Listener {
             playerData.append("UUID", p.getUniqueId().toString());
             playerData.append("Name", p.getName());
             playerData.append("Prefix", chat.getPlayerPrefix(p));
+            playerData.append("Level", 0);
             playerData.append("Discord", "Not linked");
             playerData.append("First Join", formatter.format(date));
             playerData.append("Join Message", "&7<Player> &bhas arrived!");
@@ -122,6 +123,7 @@ public class Mongo implements Listener {
             if (getData(p).get("Permission Level") != permissionLvl.get(p.getUniqueId())) {
                 InsertPlayerData(p, "Permission Level", permissionLvl.get(p.getUniqueId()));
             }
+
 
         }
 

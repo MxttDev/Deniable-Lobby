@@ -36,6 +36,7 @@ public class AdminGUIManager implements Listener {
         } else if (inv.contains(AdminGUIServer.ItemMat1) && inv.contains(AdminGUIServer.ItemMat2)) {
             if (e.getCurrentItem().getType().equals(AdminGUIServer.ItemMat1)) { // RESET CONFIG
                 plugin.ReloadTheConfig();
+                plugin.reloadConfig();
 
                 p.sendMessage(Utils.format("&aConfig has been reset."));
                 p.closeInventory();
