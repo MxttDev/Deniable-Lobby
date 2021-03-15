@@ -29,12 +29,6 @@ public class Anti implements Listener {
     }
 
     @EventHandler
-    public void onDamage(EntityDamageEvent e) {
-        Player p = (Player) e.getEntity();
-        e.setCancelled(true);
-    }
-
-    @EventHandler
     public void OnVoiDamage(PlayerMoveEvent e) {
         Player p = e.getPlayer();
 
@@ -88,6 +82,21 @@ public class Anti implements Listener {
         if (p.getGameMode() != GameMode.CREATIVE) {
             e.setCancelled(true);
         }
+    }
+
+    @EventHandler
+    public void onGeneralDamage(EntityDamageEvent e) {
+        e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onInteractPainting(PlayerInteractEvent e) {
+        Player p = e.getPlayer();
+
+        if (e.getAction() == Action.PHYSICAL && e.getClickedBlock().getType() == Material.PAINTING) { e.setCancelled(true);}
+        if (e.getAction() == Action.PHYSICAL && e.getClickedBlock().getType() == Material.MAP) { e.setCancelled(true);}
+        if (e.getAction() == Action.PHYSICAL && e.getClickedBlock().getType() == Material.ITEM_FRAME) { e.setCancelled(true);}
+
     }
 
     @EventHandler

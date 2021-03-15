@@ -23,6 +23,7 @@ import java.util.HashMap;
 public class Utils {
 
     public static HashMap<String, Integer> count = new HashMap<String, Integer>();
+    public static HashMap<String, String> serverName = new HashMap<>();
 
     public static Lobby plugin = Lobby.getPlugin(Lobby.class);
     public static Chat chat = plugin.getChat();
@@ -85,6 +86,29 @@ public class Utils {
             Bukkit.getLogger().info("REPORT TO THE DEVELOPERS.");
         }
         Bukkit.getPlayer(p.getUniqueId()).sendPluginMessage(plugin, "BungeeCord", b.toByteArray());
+    }
+
+    public static void ServerName(Player p, String server) {
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream(b);
+
+        try {
+            out.writeUTF("GetServer");
+        } catch (IOException e) {
+            System.out.println("not working | saerver name");
+        }
+
+        Bukkit.getPlayer(p.getUniqueId()).sendPluginMessage(plugin, "BungeeCord", b.toByteArray());
+    }
+
+    public static String getServerName(Player p, String server) {
+        ServerName(p,server);
+
+        if (serverName.get(server.toUpperCase()) != null) {
+            String Serv = serverName.get(server.toUpperCase());
+            return Serv;
+        }
+        return "Lobby10";
     }
 
     public static ItemStack backArrow() {

@@ -3,6 +3,7 @@ main: org.Deniable.Lobby
 version: ${version}
 api-version: 1.13
 author: Asylx
+depend: [ProtocolLib]
 
 commands:
   spawn:

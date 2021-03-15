@@ -26,7 +26,7 @@ public class CosmeticGlowSET implements Listener {
                 if (Mongo.getData(p).get("Permission Level").equals(1) || (Mongo.getData(p).get("Permission Level").equals(2)) || Mongo.getData(p).get("Permission Level").equals(3) || Mongo.getData(p).get("Permission Level").equals(4)) {
                     p.closeInventory();
 
-                    Glow.setGlow(p, ChatColor.GRAY);
+                    Glow.setGlow(p, "GRAY");
                     p.sendMessage(Utils.format("&bYou have set your glow to Gray!"));
                 } else {
                     p.closeInventory();
@@ -37,7 +37,7 @@ public class CosmeticGlowSET implements Listener {
                 if (Mongo.getData(p).get("Permission Level").equals(2) || Mongo.getData(p).get("Permission Level").equals(3) || Mongo.getData(p).get("Permission Level").equals(4)) {
                     p.closeInventory();
 
-                    Glow.setGlow(p, ChatColor.AQUA);
+                    Glow.setGlow(p, "AQUA");
                     p.sendMessage(Utils.format("&bYou have set your glow to Aqua!"));
                 } else {
                     p.closeInventory();
@@ -48,7 +48,7 @@ public class CosmeticGlowSET implements Listener {
                 if (Mongo.getData(p).get("Permission Level").equals(3) || Mongo.getData(p).get("Permission Level").equals(4)) {
                     p.closeInventory();
 
-                    Glow.setGlow(p, ChatColor.LIGHT_PURPLE);
+                    Glow.setGlow(p, "PINK");
                     p.sendMessage(Utils.format("&bYou have set your glow to Pink!"));
                 } else {
                     p.closeInventory();
@@ -59,7 +59,7 @@ public class CosmeticGlowSET implements Listener {
                 if (Mongo.getData(p).get("Permission Level").equals(4)) {
                     p.closeInventory();
 
-                    Glow.setGlow(p, ChatColor.RED);
+                    Glow.setGlow(p, "RED");
                     p.sendMessage(Utils.format("&bYou have set your glow to Red!"));
                 } else {
                     p.closeInventory();

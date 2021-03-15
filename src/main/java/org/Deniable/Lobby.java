@@ -1,5 +1,7 @@
 package org.Deniable;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 import net.milkbowl.vault.chat.Chat;
@@ -36,11 +38,13 @@ import java.net.UnknownHostException;
 public class Lobby extends JavaPlugin implements Listener, PluginMessageListener {
 
     FileConfiguration config = getConfig();
+    private ProtocolManager protocolManager;
     public Chat chat = null;
 
     @Override
     public void onEnable() {
         getLogger().info("Plugin has initiated.");
+        protocolManager = ProtocolLibrary.getProtocolManager();
 
         config.options().copyDefaults(true);
 
@@ -115,18 +119,24 @@ public class Lobby extends JavaPlugin implements Listener, PluginMessageListener
         return chat;
     }
 
+    @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] message) {
+
         if (!channel.equals("BungeeCord")) {
             return;
         }
 
         ByteArrayDataInput in = ByteStreams.newDataInput(message);
         String subchannel = in.readUTF();
-
+        
         if (subchannel.equals("PlayerCount")) {
             String server = in.readUTF();
             Utils.count.put(server, in.readInt());
 
+        }
+        if (subchannel.equals("GetServer")) {
+            String Servername = in.readUTF();
+            Utils.serverName.put(Servername.toUpperCase(), Servername.toUpperCase());
         }
 
     }
@@ -160,16 +170,18 @@ public class Lobby extends JavaPlugin implements Listener, PluginMessageListener
             Score a3 = obj.getScore(Utils.format("Level: &e0"));
             Score a4 = obj.getScore(Utils.format("&e &b"));
             Score a5 = obj.getScore(Utils.format("Online: &e"+Utils.getServerCount(a, "ALL")));
-            Score a6 = obj.getScore(Utils.format("&e "));
-            Score a7 = obj.getScore(Utils.format("&eplay.deniable.net"));
+            Score a6 = obj.getScore(Utils.format("Lobby: &e"+Utils.getServerName(a, "Lobby1")));
+            Score a7 = obj.getScore(Utils.format("&e "));
+            Score a8 = obj.getScore(Utils.format("&eplay.deniable.net"));
 
-            a1.setScore(7);
-            a2.setScore(6);
-            a3.setScore(5);
-            a4.setScore(4);
-            a5.setScore(3);
-            a6.setScore(2);
-            a7.setScore(1);
+            a1.setScore(8);
+            a2.setScore(7);
+            a3.setScore(6);
+            a4.setScore(5);
+            a5.setScore(4);
+            a6.setScore(3);
+            a7.setScore(2);
+            a8.setScore(1);
             a.setScoreboard(board);
 
         }
